@@ -54,6 +54,6 @@ The script now generates and saves two plots for visual analysis:
 - **Absolute Differences** (bar chart highlighting errors)
 
 ## Future Enhancements
-- Add Matplotlib visualizations of data differences
+- ~~Add Matplotlib visualizations of data differences~~
 - Support loading real datasets from files
 - Configurable error rates via command-line arguments
