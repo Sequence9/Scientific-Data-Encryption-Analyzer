@@ -1,15 +1,16 @@
 import numpy as np
 import scipy.stats as stats
+import matplotlib.pyplot as plt
 
-# generate sample scientific data: 100 random measurements (e.g., sensor readings) between 0 and 100
+# generate sample scientific data
 data = np.random.uniform(0, 100, 100).astype(np.uint8)  # convert to uint8 for byte-level XOR
 
-# XOR encryption key
+# simple XOR encryption key
 key = np.array([42] * len(data), dtype=np.uint8)
 
 encrypted = np.bitwise_xor(data, key)
 
-# simulate transmission errors
+# Simulate transmission errors: randomly flip bits in 5% of the data
 error_rate = 0.05
 num_errors = int(len(encrypted) * error_rate)
 error_indices = np.random.choice(len(encrypted), num_errors, replace=False)
@@ -36,6 +37,31 @@ if p_value < 0.05:
 else:
     print("No significant errors detected.")
 
-# error flag: check if any differences > 0
 errors_detected = np.any(differences > 0)
 print(f"Errors detected (any difference): {errors_detected}")
+
+# Matplotlib Visualizations
+
+# plot 1: line comparison of original vs decrypted data
+plt.figure(figsize=(10, 6))
+plt.plot(data, label='Original Data', alpha=0.8)
+plt.plot(decrypted, label='Decrypted (with simulated errors)', alpha=0.8, linestyle='--')
+plt.title('Original vs Decrypted Data Comparison')
+plt.xlabel('Data Point Index')
+plt.ylabel('Value')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.savefig('data_comparison.png')
+plt.show()
+
+# plot 2: bar chart of absolute differences
+plt.figure(figsize=(10, 6))
+plt.bar(range(len(differences)), differences, color='salmon', alpha=0.7)
+plt.title('Absolute Differences Between Original and Decrypted Data')
+plt.xlabel('Data Point Index')
+plt.ylabel('Difference')
+plt.grid(True, alpha=0.3, axis='y')
+plt.tight_layout()
+plt.savefig('differences_bar.png')
+plt.show()
