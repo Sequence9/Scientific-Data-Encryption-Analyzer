@@ -50,10 +50,8 @@ Errors detected (any difference): True
 The script now generates and saves two plots for visual analysis:
 
 - **Original vs Decrypted Data** (line plot)
-  ![Data Comparison](data_comparison.png)
 
 - **Absolute Differences** (bar chart highlighting errors)
-  ![Differences Bar](differences_bar.png)
 
 ## Future Enhancements
 - Add Matplotlib visualizations of data differences
